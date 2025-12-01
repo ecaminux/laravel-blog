@@ -1,5 +1,11 @@
 @extends('layouts.mylayout')
 
+@push('styles')
+    {{-- ESTILO PERSONALIZADO  --}}
+    @vite(['resources/css/customblog.css'])
+
+@endpush
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -20,29 +26,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('menu')
-<div class="list-group">
-    
-    <button type="button" class="list-group-item list-group-item-action">
-        Usuarios
-    </button>
-    <button type="button" class="list-group-item list-group-item-action">
-        Posts
-    </button>
-    <button type="button" class="list-group-item list-group-item-action">
-        Comentarios
-    </button>
-    
-</div>
-@endsection
-
-@section('footer')
-
-<ul class="list-group list-group-numbered">
-    <li class="list-group-item active">Active item</li>
-    <li class="list-group-item">Item</li>
-    <li class="list-group-item disabled">Disabled item</li>
-</ul>
 @endsection
