@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Crear Nueva Publicación</h1>
+        <h1>Editar Publicación</h1>
 
         @if ($errors->any())
             <article>
@@ -18,20 +18,22 @@
             </article>
         @endif
 
-        <form action="{{ route('posts.store') }}" method="POST">
+        <form action="{{ route('posts.update', $post->id) }}" method="POST">
             @csrf
-
-            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+            @method('PUT')
 
             <label for="title">Título</label>
-            <input type="text" name="title" id="title" placeholder="Título" required>
+            <input type="text" name="title" id="title" value="{{ $post->title }}" placeholder="Título" required>
 
             <label for="content">Contenido</label>
-            <textarea name="content" id="content" placeholder="Contenido" style="height:150px" required></textarea>
+            <textarea name="content" id="content" placeholder="Contenido" style="height:150px"
+                required>{{ $post->content }}</textarea>
 
             <label for="image_url">URL de la Imagen</label>
-            <input type="text" name="image_url" id="image_url" placeholder="URL de la Imagen">
-            <button type="submit">Guardar</button>
+            <input type="text" name="image_url" id="image_url" placeholder="URL de la Imagen"
+                value="{{ $post->image_url }}">
+
+            <button type="submit">Actualizar</button>
         </form>
     </div>
 @endsection

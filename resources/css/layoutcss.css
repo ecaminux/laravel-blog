@@ -7,9 +7,10 @@
 .container-blog {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto;
     grid-template-areas:
         "headerb"
+        "menu"
         "content"
         "footerb"
     ;
@@ -23,6 +24,28 @@
 .header-blog {
     grid-area: headerb;
     padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-blog {
+    grid-area: menu;
+    padding: 10px 0;
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+}
+
+.menu-blog div a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+}
+
+.menu-blog div a:hover {
+    text-decoration: underline;
 }
 
 .content-blog {
@@ -34,6 +57,8 @@
     grid-area: footerb;
     padding: 20px 0;
     text-align: center;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 20px;
 }
 
 /* Responsive grid for posts */
@@ -43,10 +68,10 @@
     gap: 20px;
 }
 
-.container-blog nav {
-    display: flex;
-    justify-content: space-between;
+/* Ensure images in posts fit nicely */
+.content-blog article img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
 }
-
-
-/* ESTILOS DEL BLOG PARA EL LOGIN */

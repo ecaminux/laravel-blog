@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $posts = Post::latest()->get();
+        return view('post.index', compact('posts'));
     }
 
     /**
@@ -20,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -28,7 +35,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Se consideran los campos obligatorios
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ], [
+            'title.required' => 'El título es obligatorio.',
+            'content.required' => 'El contenido es obligatorio.',
+        ]);
+
+        $post = Post::create([
+            'user_id' => auth()->user()->id,
+            'title' => $request->title,
+            'content' => $request->content,
+            'image_url' => $request->image_url,
+        ]);
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Publicación creada exitosamente.');
     }
 
     /**
@@ -36,7 +60,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('post.show', compact('post'));
     }
 
     /**
@@ -44,7 +68,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -52,7 +76,18 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ], [
+            'title.required' => 'El título es obligatorio.',
+            'content.required' => 'El contenido es obligatorio.',
+        ]);
+
+        $post->update($request->all());
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Publicación actualizada exitosamente');
     }
 
     /**
@@ -60,6 +95,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Publicación eliminada exitosamente');
     }
 }
