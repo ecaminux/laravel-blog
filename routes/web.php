@@ -6,4 +6,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('in
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+
 Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::resource('comments', controller: App\Http\Controllers\CommentController::class);

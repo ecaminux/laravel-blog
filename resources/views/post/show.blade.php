@@ -43,5 +43,21 @@
                 </div>
             </footer>
         </article>
+        <section>
+            <form action="{{ route('comments.store') }}" method="post">
+                @csrf
+                <input type="hidden" value="{{ $post->id }}" name="post_id">
+                <input type="text" name="content">
+                <input type="submit" value="Enviar comentario">
+            </form>
+        </section>
+
+        <section>
+             @foreach ($comments->all() as $comment)
+                <div>
+                    <li>{{ $comment->content }} por ({{ $comment->user->name }})</li>
+                </div>
+            @endforeach
+        </section>
     </div>
 @endsection

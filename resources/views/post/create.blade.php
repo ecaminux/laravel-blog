@@ -24,13 +24,14 @@
             <input type="hidden" name="user_id" value="{{ auth()->id() }}">
 
             <label for="title">Título</label>
-            <input type="text" name="title" id="title" placeholder="Título" required>
+            <input type="text" name="title" id="title" placeholder="Título">
 
             <label for="content">Contenido</label>
-            <textarea name="content" id="content" placeholder="Contenido" style="height:150px" required></textarea>
+            <textarea name="content" id="content" placeholder="Contenido" style="height:150px"></textarea>
 
             <label for="image_url">URL de la Imagen</label>
             <input type="text" name="image_url" id="image_url" placeholder="URL de la Imagen">
+
             <button type="submit">Guardar</button>
         </form>
     </div>

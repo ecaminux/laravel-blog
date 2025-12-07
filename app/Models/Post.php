@@ -35,7 +35,7 @@ class Post extends Model
 
     public function comments(): HasMany
     {
-        return $this->hasMany(Comments::class, 'post_id', 'id');
+        return $this->hasMany(Comment::class, 'post_id', 'id');
         // hasMany(ModelRelacionado, clave_foránea, clave_local)
     }
 
