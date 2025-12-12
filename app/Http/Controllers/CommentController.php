@@ -13,7 +13,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        return redirect('posts');
     }
 
     /**
@@ -59,7 +59,9 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $comment->likes_count += 1;
+        $comment->save();
+        return redirect()->back()->withFragment($request->reference_id)->with('success', 'Has dado like al comentario.');
     }
 
     /**

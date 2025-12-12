@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::all();
         return view('post.index', compact('posts'));
     }
 
@@ -61,7 +61,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('post.show', compact('post') )->with('comments', $post->comments);
+        return view('post.show', compact('post') )->with('comments', $post->comments()->orderBy('created_at', 'desc')->get());
     }
 
     /**

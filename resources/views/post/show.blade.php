@@ -54,9 +54,17 @@
 
         <section>
              @foreach ($comments->all() as $comment)
-                <div>
-                    <li>{{ $comment->content }} por ({{ $comment->user->name }})</li>
-                </div>
+                <section>
+                    <cite id="comment{{ $comment->id }}">{{ $comment->content }} por ({{ $comment->user->name }})</cite>
+                    <p>( {{ $comment->likes_count }} )</p>
+                    <form action="{{ route('comments.update', $comment->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="reference_id" value="comment{{ $comment->id }}">
+                        <input type="submit" class="btn" value="Like">
+                    </form>
+                    <hr>
+                </section>
             @endforeach
         </section>
     </div>

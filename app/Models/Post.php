@@ -17,7 +17,7 @@ class Post extends Model
         'image_url'
     ];
 
-    protected $primaryKey = 'id';
+    //protected $primaryKey = 'id';
     protected $keyType = 'integer';
 
     protected $required = [
